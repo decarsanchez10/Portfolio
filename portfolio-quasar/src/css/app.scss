@@ -1,0 +1,239 @@
+// ─── DESIGN TOKENS ──────────────────────────────────────────────
+:root {
+  --c:    #C4956A;   /* warm gold accent                */
+  --cd:   #8B6340;   /* dark gold                       */
+  --bg:   #170806;   /* dark chocolate                  */
+  --s1:   #220D08;   /* surface 1                       */
+  --s2:   #2D1510;   /* surface 2                       */
+  --s3:   #3D1F18;   /* surface 3                       */
+  --wh:   #F2E4CC;   /* cream white                     */
+  --off:  #EDD9B8;   /* off cream                       */
+  --gr:   #8B7355;   /* warm gray                       */
+  --lgr:  #C4A882;   /* light warm gray                 */
+
+  --font-display: 'Cinzel', serif;
+  --font-body:    'Cormorant Garamond', serif;
+  --font-mono:    'Space Mono', monospace;
+}
+
+// ─── RESET / BASE ────────────────────────────────────────────────
+* { cursor: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg) !important;
+  color: var(--wh);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+// ─── CUSTOM CURSOR ───────────────────────────────────────────────
+.cur-dot {
+  position: fixed; width: 8px; height: 8px; background: var(--c);
+  border-radius: 50%; pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s;
+  &.active { transform: translate(-50%, -50%) scale(2.2); }
+}
+.cur-ring {
+  position: fixed; width: 44px; height: 44px;
+  border: 1.5px solid rgba(196, 149, 106, 0.5);
+  border-radius: 50%; pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width .4s cubic-bezier(.16,1,.3,1), height .4s cubic-bezier(.16,1,.3,1), border-color .4s;
+  &.active { width: 76px; height: 76px; border-color: var(--c); }
+}
+
+// ─── LOADER ──────────────────────────────────────────────────────
+.loader-overlay {
+  position: fixed; inset: 0; background: var(--bg);
+  z-index: 90000; display: flex; align-items: center; justify-content: center;
+}
+.loader-word {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 700;
+  color: var(--c);
+  letter-spacing: 0.2em;
+  overflow: hidden;
+  span { display: block; }
+}
+
+// ─── QUASAR HEADER ────────────────────────────────────────────────
+.q-header {
+  background: transparent !important;
+  transition: background .5s, border-color .5s !important;
+  border-bottom: 1px solid transparent !important;
+  box-shadow: none !important;
+  &.nav-pinned {
+    background: rgba(23, 8, 6, 0.95) !important;
+    backdrop-filter: blur(22px);
+    border-bottom-color: rgba(196, 149, 106, 0.2) !important;
+  }
+}
+
+// ─── MOBILE MENU ─────────────────────────────────────────────────
+.mob-menu {
+  position: fixed; inset: 0; background: var(--bg); z-index: 9000;
+  display: flex; align-items: center; justify-content: center;
+  transform: translateX(-100%);
+  transition: transform .65s cubic-bezier(.16,1,.3,1);
+  &.open { transform: translateX(0); }
+  ul { list-style: none; padding: 0; text-align: center; }
+  li { overflow: hidden; margin-bottom: .5rem; }
+  a {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--wh); letter-spacing: 0.1em;
+    display: inline-block;
+    transition: color .3s, transform .35s;
+    text-decoration: none;
+    &:hover { color: var(--c); transform: translateX(10px); }
+  }
+}
+.mob-num {
+  font-family: var(--font-mono);
+  font-size: .6rem; color: var(--c);
+  vertical-align: super; margin-right: .4rem;
+}
+
+// ─── NAV ─────────────────────────────────────────────────────────
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--c);
+  cursor: none;
+}
+.nav-btn {
+  font-family: var(--font-mono) !important;
+  font-size: .68rem !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+  color: var(--lgr) !important;
+  position: relative;
+  &::after {
+    content: ''; position: absolute; bottom: 4px; left: 12px; right: 12px;
+    height: 1px; background: var(--c);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  &:hover {
+    color: var(--wh) !important;
+    &::after { transform: scaleX(1); }
+  }
+  .q-focus-helper { display: none; }
+}
+
+// ─── BUTTON ───────────────────────────────────────────────────────
+.btn-crimson {
+  font-family: var(--font-mono) !important;
+  font-size: .65rem !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  border: 1px solid var(--c) !important;
+  color: var(--c) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  position: relative; overflow: hidden !important;
+  transition: color .4s !important;
+  &::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--c); transform: translateX(-101%);
+    transition: transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  &:hover {
+    color: var(--bg) !important;
+    &::before { transform: translateX(0); }
+  }
+  .q-btn__content { position: relative; z-index: 1; }
+  .q-focus-helper { display: none; }
+}
+
+// ─── SECTION HELPERS ──────────────────────────────────────────────
+.sec-label {
+  font-family: var(--font-mono);
+  font-size: .62rem; letter-spacing: .4em;
+  text-transform: uppercase; color: var(--c); margin-bottom: 1.5rem;
+}
+.sec-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 1.0;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 3.5rem;
+}
+.rev-line { overflow: hidden; span { display: block; } }
+.cat-title {
+  font-family: var(--font-mono);
+  font-size: .63rem; letter-spacing: .32em;
+  text-transform: uppercase; color: var(--c);
+  margin-bottom: 1.25rem; padding-bottom: .75rem;
+  border-bottom: 1px solid var(--s2);
+}
+
+// ─── SCROLL ANIMATION ─────────────────────────────────────────────
+.fi {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+  &.vis { opacity: 1; transform: translateY(0); }
+}
+@for $i from 1 through 4 {
+  .fi-d#{$i} { transition-delay: #{$i * 0.1}s !important; }
+}
+
+// ─── MARQUEE ──────────────────────────────────────────────────────
+.mq-wrap { background: var(--s2); padding: 1.1rem 0; overflow: hidden; white-space: nowrap; border-top: 1px solid var(--c); border-bottom: 1px solid var(--c); }
+.mq-track { display: inline-flex; animation: mqa 22s linear infinite; }
+.mq-item {
+  font-family: var(--font-display);
+  font-size: 1rem; letter-spacing: .2em;
+  padding: 0 2rem; color: var(--c);
+  display: flex; align-items: center; gap: 2rem;
+}
+.mq-dot { width: 4px; height: 4px; background: rgba(196,149,106,.4); border-radius: 50%; flex-shrink: 0; }
+@keyframes mqa { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+// ─── SCROLL INDICATOR ─────────────────────────────────────────────
+.scroll-ind {
+  position: absolute; right: 3rem; bottom: 5.5rem;
+  display: flex; flex-direction: column; align-items: center; gap: .8rem;
+  span {
+    font-family: var(--font-mono); font-size: .58rem;
+    letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gr); writing-mode: vertical-rl;
+  }
+}
+.s-line {
+  width: 1px; height: 65px;
+  background: linear-gradient(to bottom, var(--c), transparent);
+  animation: sline 1.8s ease-in-out infinite;
+}
+@keyframes sline {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+// ─── SEPARATOR ────────────────────────────────────────────────────
+.q-separator { background: var(--s2) !important; }
+
+// ─── TYPING CURSOR ────────────────────────────────────────────────
+.typing-cursor {
+  display: inline-block;
+  color: var(--c);
+  font-weight: 300;
+  animation: blink .7s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+// ─── RESPONSIVE ───────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .scroll-ind { right: 1.5rem; bottom: 4.5rem; }
+}
