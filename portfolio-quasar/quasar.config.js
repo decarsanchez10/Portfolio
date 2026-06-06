@@ -13,7 +13,7 @@ module.exports = function (/* ctx */) {
     },
     devServer: {
       open: true,
-      port: 3000
+      port: 9100
     },
     framework: {
       config: {

@@ -10,13 +10,11 @@
       </div>
     </div>
 
+    <ProjectSection />
+    <q-separator />
+    <ExperienceSection />
+    <q-separator />
     <AboutSection />
-    <q-separator />
-    <ProjectsSection />
-    <SkillsSection />
-    <q-separator />
-    <EducationSection />
-    <ContactSection />
     <FooterSection />
   </q-page>
 </template>
@@ -24,13 +22,13 @@
 <script setup>
 import { computed } from 'vue'
 import { scroll } from 'quasar'
-import HeroSection      from 'src/components/HeroSection.vue'
-import AboutSection     from 'src/components/AboutSection.vue'
-import ProjectsSection  from 'src/components/ProjectsSection.vue'
-import SkillsSection    from 'src/components/SkillsSection.vue'
-import EducationSection from 'src/components/EducationSection.vue'
-import ContactSection   from 'src/components/ContactSection.vue'
-import FooterSection    from 'src/components/FooterSection.vue'
+import HeroSection from 'src/components/HeroSection.vue'
+import ProjectSection from 'src/components/ProjectSection.vue'
+import ExperienceSection from 'src/components/ExperienceSection.vue'
+import AboutSection from 'src/components/AboutSection.vue'
+import FooterSection from 'src/components/FooterSection.vue'
+
+
 
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 const mqBase = ['PHP','JavaScript','Python','MySQL','HTML5','CSS3','Web Dev','Three.js','Java','C++','SQL','CSS3']
