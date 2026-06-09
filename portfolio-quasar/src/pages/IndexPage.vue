@@ -24,7 +24,8 @@ import { computed } from 'vue'
 import { scroll } from 'quasar'
 import HeroSection from 'src/components/HeroSection.vue'
 import ExperienceSection from 'src/components/ExperienceSection.vue'
-import AboutSection from 'src/components/FooterSection.vue'
+import AboutSection from 'src/components/AboutSection.vue'
+import FooterSection from 'src/components/FooterSection.vue'
 
 
 

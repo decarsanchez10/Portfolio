@@ -155,7 +155,7 @@ onMounted(() => {
 }
 .hero-name {
   display: flex; flex-direction: column;
-  font-family: var(--font-display);
+font-family:var(--font-s);
   font-size: clamp(3.5rem,7vw,7.5rem);
   line-height: 0.95; letter-spacing: 0.08em; font-weight: 900; margin: 0;
 }

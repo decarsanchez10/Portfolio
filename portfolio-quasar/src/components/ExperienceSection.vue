@@ -1,40 +1,46 @@
 <template>
-  <section id="projects" class="proj-section">
-    <div class="proj-inner">
-      <p class="sec-label fi" ref="labelEl">✦ Featured Work</p>
-      <p class="sec-label-mono fi fi-d1" ref="monoEl">04 / Projects</p>
+  <section id="projects" class="proj-sec" ref="secRef">
+    <div class="proj-header">
+      <p class="sec-label fi" ref="lbl">✦ Featured Work</p>
+      <p class="sec-label-mono fi fi-d1" ref="mono">04 / Projects</p>
       <h2 class="sec-title">
         <div class="rev-line"><span ref="t1">FEATURED</span></div>
         <div class="rev-line"><span ref="t2">PROJECTS</span></div>
       </h2>
-      <div class="proj-grid">
-        <q-card v-for="(p,i) in projects" :key="p.title" flat dark
-          class="proj-card fi" :class="`fi-d${i+1}`"
-          :ref="el => cardRefs[i]=el"
+    </div>
+
+    <!-- Horizontal scroll track -->
+    <div class="h-container" ref="hContainer">
+      <div class="h-track" ref="hTrack">
+        <div class="h-slide" v-for="(p,i) in projects" :key="p.title"
           @mouseenter="onEnter" @mouseleave="onLeave">
-          <div class="proj-overlay" />
-          <div class="proj-content">
-            <div class="proj-top">
-              <div class="proj-num shimmer-text">0{{ i+1 }}</div>
-              <span class="proj-badge" v-if="p.badge">{{ p.badge }}</span>
+          <div class="slide-inner">
+            <div class="slide-top">
+              <span class="slide-num shimmer-text">0{{i+1}}</span>
+              <span class="slide-badge" v-if="p.badge">{{p.badge}}</span>
             </div>
-            <div>
-              <span class="proj-arr">↗</span>
-              <h3 class="proj-title">{{ p.title }}</h3>
-              <p class="proj-desc">{{ p.desc }}</p>
-              <div class="proj-tags row q-gutter-xs">
-                <q-chip v-for="t in p.tags" :key="t" dense dark class="proj-chip">{{ t }}</q-chip>
+            <div class="slide-body">
+              <span class="slide-arr">↗</span>
+              <h3 class="slide-title">{{p.title}}</h3>
+              <p class="slide-desc">{{p.desc}}</p>
+              <div class="slide-tags">
+                <span class="s-tag" v-for="t in p.tags" :key="t">{{t}}</span>
               </div>
             </div>
           </div>
-        </q-card>
+        </div>
       </div>
+    </div>
+
+    <!-- Progress indicator -->
+    <div class="h-progress">
+      <div class="h-bar" ref="hBar"/>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useCursor } from 'src/composables/useCursor'
@@ -42,115 +48,115 @@ import { useCursor } from 'src/composables/useCursor'
 gsap.registerPlugin(ScrollTrigger)
 const { onEnter, onLeave } = useCursor()
 
-const labelEl  = ref(null)
-const monoEl   = ref(null)
-const t1       = ref(null)
-const t2       = ref(null)
-const cardRefs = reactive([])
+const secRef     = ref(null)
+const lbl        = ref(null)
+const mono       = ref(null)
+const t1         = ref(null)
+const t2         = ref(null)
+const hContainer = ref(null)
+const hTrack     = ref(null)
+const hBar       = ref(null)
 
 const projects = [
-  {
-    title: 'Blockchain Web Project',
-    badge: '🌐 Internship',
-    desc:  'Developed during my internship at SciBiz Informatics. A modern web application leveraging secure decentralized concepts and seamless data presentation with optimized front-end performance.',
-    tags:  ['Vue.js','Quasar','Blockchain','JavaScript','CSS3']
-  },
-  {
-    title: 'Barangay Information System',
-    desc:  'A comprehensive digital management system automating resident profiling, blotter record tracking, and automated issuance of local certificates — eliminating manual paperwork delays.',
-    tags:  ['PHP','MySQL','HTML5','CSS','JavaScript']
-  },
-  {
-    title: 'Attendance Enforcement & Penalty System',
-    desc:  'Automated compliance tracker for university events. Custom backend logic tracks real-time attendance and auto-calculates penalties, minimizing human error and admin overhead.',
-    tags:  ['PHP','SQL','JavaScript','HTML5','CSS']
-  },
-  {
-    title: '"Raced" Landing Page',
-    badge: '🏎️ 3D',
-    desc:  'Lead Developer on a high-performance 3D interactive landing page for a Cognate Elective project, emphasizing modern UI/UX design, immersive Three.js visuals, and fast loading speeds.',
-    tags:  ['Three.js','HTML5','CSS','JavaScript']
-  }
+  { title:'Blockchain Web Project',   badge:'🌐 Internship', desc:'Developed at SciBiz Informatics. A modern web application leveraging secure decentralized concepts with optimized front-end performance and seamless blockchain data presentation.',                                             tags:['Vue.js','Quasar','Blockchain','JavaScript','CSS3'] },
+  { title:'Barangay Information System',               desc:'A comprehensive digital management system automating resident profiling, blotter record tracking, and automated issuance of local certificates — eliminating manual paperwork delays.',                            tags:['PHP','MySQL','HTML5','CSS','JavaScript'] },
+  { title:'Attendance Enforcement & Penalty System',   desc:'Automated compliance tracker for university events. Custom backend logic tracks real-time attendance and auto-calculates penalties, minimizing human error and admin overhead.',                              tags:['PHP','SQL','JavaScript','HTML5','CSS'] },
+  { title:'"Raced" Landing Page',     badge:'🏎️ 3D',        desc:'Lead Developer on a high-performance 3D interactive landing page featuring immersive Three.js visuals, modern UI/UX design principles, and fast optimized loading speeds.',                          tags:['Three.js','HTML5','CSS','JavaScript'] }
 ]
 
 onMounted(() => {
-  gsap.set([t1.value, t2.value], { y: '110%' })
-  ;[labelEl.value, monoEl.value].forEach(el => {
-    if (!el) return
-    ScrollTrigger.create({ trigger: el, start: 'top 88%', onEnter: () => el.classList.add('vis') })
+  gsap.set([t1.value, t2.value], { y:'110%' })
+  ;[lbl.value, mono.value].forEach(el=>{
+    if(!el) return
+    ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('vis')})
   })
   ScrollTrigger.create({
-    trigger: t1.value, start: 'top 87%',
-    onEnter: () => {
-      gsap.to(t1.value, { y: 0, duration: 0.95, ease: 'power3.out' })
-      gsap.to(t2.value, { y: 0, duration: 0.95, ease: 'power3.out', delay: 0.09 })
+    trigger:t1.value, start:'top 87%',
+    onEnter:()=>{
+      gsap.to(t1.value,{y:0,duration:.95,ease:'power3.out'})
+      gsap.to(t2.value,{y:0,duration:.95,ease:'power3.out',delay:.09})
     }
   })
-  cardRefs.forEach(card => {
-    if (!card?.$el) return
-    ScrollTrigger.create({ trigger: card.$el, start: 'top 88%', onEnter: () => card.$el.classList.add('vis') })
+
+  // ── Horizontal Scroll ────────────────────────────────────────────
+  const slides = hTrack.value?.querySelectorAll('.h-slide')
+  if (!hTrack.value || !slides?.length) return
+
+  const totalSlides = slides.length
+  const slideWidth  = slides[0].offsetWidth
+
+  gsap.to(hTrack.value, {
+    x: () => -(hTrack.value.scrollWidth - hContainer.value.offsetWidth),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: hContainer.value,
+      start: 'top top',
+      end: () => `+=${hTrack.value.scrollWidth - hContainer.value.offsetWidth + 200}`,
+      pin: true,
+      scrub: 1.2,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        if (hBar.value) hBar.value.style.width = (self.progress * 100) + '%'
+      }
+    }
+  })
+
+  // Clip-path reveal each card as it enters view
+  slides.forEach((slide, i) => {
+    gsap.from(slide.querySelector('.slide-inner'), {
+      clipPath: 'inset(0 100% 0 0)',
+      duration: 1,
+      ease: 'power4.out',
+      scrollTrigger: {
+        trigger: slide,
+        containerAnimation: ScrollTrigger.getById('horizontal'),
+        start: 'left center',
+      }
+    })
   })
 })
 </script>
 
 <style lang="scss" scoped>
-.proj-section { background: var(--s1); padding: 9rem 0; position: relative;
-  &::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: .25; }
+.proj-sec { background:var(--s1); overflow:hidden; position:relative;
+  &::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); opacity:.25; }
 }
-.proj-inner { max-width: 1440px; margin: 0 auto; padding: 0 3rem; }
-.proj-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
+.proj-header { max-width:1440px; margin:0 auto; padding:9rem 3rem 3rem; }
 
-.proj-card {
-  background: var(--bg) !important; border-radius: 0 !important;
-  overflow: hidden !important; position: relative;
+.h-container { width:100%; overflow:hidden; }
+.h-track { display:flex; gap:2px; width:max-content; padding:0 3rem 6rem; }
+
+.h-slide {
+  width: min(480px, 85vw);
+  flex-shrink: 0;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
   &::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--burg), rgba(114,47,55,.9));
-    transform: translateY(101%); transition: transform .65s cubic-bezier(.16,1,.3,1); z-index: 0;
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg,var(--burg),rgba(114,47,55,.9));
+    transform:translateY(101%); transition:transform .65s cubic-bezier(.16,1,.3,1); z-index:0;
   }
   &:hover {
-    &::after { transform: translateY(0); }
-    .proj-num { color: rgba(255,245,230,.12); }
-    .proj-desc { color: rgba(255,245,230,.82); }
-    .proj-arr { transform: translate(5px,-5px); color: var(--gold-lt); }
-    :deep(.proj-chip) { background: rgba(201,168,76,.2) !important; color: var(--gold-lt) !important; border-color: rgba(201,168,76,.4) !important; }
+    &::after { transform:translateY(0); }
+    .slide-num  { color:rgba(255,245,230,.1); }
+    .slide-desc { color:rgba(255,245,230,.82); }
+    .slide-arr  { transform:translate(5px,-5px); color:var(--gold-lt); }
+    .s-tag      { background:rgba(201,168,76,.2); color:var(--gold-lt); border-color:rgba(201,168,76,.4); }
   }
 }
-.proj-content {
-  position: relative; z-index: 1;
-  min-height: 380px; display: flex; flex-direction: column;
-  justify-content: space-between; padding: 3rem 2.5rem;
-}
-.proj-top { display: flex; justify-content: space-between; align-items: flex-start; }
-.proj-num {
-  font-family: var(--font-display); font-size: 5.5rem;
-  line-height: 1; color: var(--s2); transition: color .4s; font-weight: 900;
-}
-.proj-badge {
-  font-family: var(--font-mono); font-size: .58rem; letter-spacing: .15em;
-  text-transform: uppercase; padding: .3rem .8rem;
-  border: 1px solid rgba(201,168,76,.3); color: var(--gold);
-  white-space: nowrap;
-}
-.proj-arr {
-  position: absolute; top: 2.5rem; right: 2.5rem; font-size: 1.3rem;
-  color: var(--gold); transition: transform .4s cubic-bezier(.16,1,.3,1), color .3s;
-}
-.proj-title {
-  font-family: var(--font-display); font-size: 1.6rem;
-  letter-spacing: .06em; margin: 0 0 .9rem; line-height: 1.2;
-  color: var(--cream);
-}
-.proj-desc { font-size: .95rem; line-height: 1.75; color: var(--gr); flex: 1; margin-bottom: 1.5rem; transition: color .4s; }
+.slide-inner { position:relative; z-index:1; min-height:420px; display:flex; flex-direction:column; justify-content:space-between; padding:3rem 2.5rem; }
+.slide-top { display:flex; justify-content:space-between; align-items:flex-start; }
+.slide-num { font-family:var(--font-d); font-size:5.5rem; line-height:1; color:var(--s2); transition:color .4s; font-weight:900; }
+.slide-badge { font-family:var(--font-m); font-size:.55rem; letter-spacing:.15em; text-transform:uppercase; padding:.3rem .8rem; border:1px solid rgba(201,168,76,.3); color:var(--gold); white-space:nowrap; }
+.slide-arr { position:absolute; top:2.5rem; right:2.5rem; font-size:1.3rem; color:var(--gold); transition:transform .4s cubic-bezier(.16,1,.3,1),color .3s; }
+.slide-title { font-family:var(--font-d); font-size:1.6rem; letter-spacing:.06em; margin:0 0 .9rem; line-height:1.2; color:var(--cream); }
+.slide-desc { font-size:.95rem; line-height:1.75; color:var(--gr); flex:1; margin-bottom:1.5rem; transition:color .4s; }
+.slide-tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+.s-tag { font-family:var(--font-m); font-size:.56rem; letter-spacing:.12em; text-transform:uppercase; padding:.3rem .8rem; border:1px solid rgba(201,168,76,.25); color:var(--gold); transition:background .3s,color .3s,border-color .3s; }
 
-:deep(.proj-chip) {
-  border-radius: 0 !important; font-family: var(--font-mono) !important;
-  font-size: .56rem !important; letter-spacing: .12em !important;
-  text-transform: uppercase !important; background: transparent !important;
-  border: 1px solid rgba(201,168,76,.25) !important; color: var(--gold) !important;
-  transition: all .3s !important;
-}
+.h-progress { position:sticky; bottom:0; left:0; right:0; height:2px; background:var(--s2); }
+.h-bar { height:100%; background:linear-gradient(to right,var(--gold-dk),var(--gold-lt)); width:0; transition:width .1s; }
 
-@media (max-width: 1024px) { .proj-grid { grid-template-columns: 1fr; } }
-@media (max-width: 768px) { .proj-inner { padding: 0 1.5rem; } .proj-section { padding: 5.5rem 0; } }
+@media (max-width:768px) { .proj-header { padding:5.5rem 1.5rem 2rem; } .h-track { padding:0 1.5rem 4rem; } }
 </style>
