@@ -20,10 +20,16 @@
           </div>
         </div>
 
-  
+        <div class="stat-grid fi-right" ref="rightEl">
+          <div class="stat-card" v-for="(s,i) in stats" :key="s.label"
+            :ref="el=>statRefs[i]=el"
+            @mouseenter="onEnter" @mouseleave="onLeave">
+            <div class="stat-n shimmer-text" :ref="el=>countEls[i]=el">{{ s.display }}</div>
+            <div class="stat-l">{{ s.label }}</div>
+          </div>
         </div>
       </div>
-    
+    </div>
   </section>
 </template>
 
