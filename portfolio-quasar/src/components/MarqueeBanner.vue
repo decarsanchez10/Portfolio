@@ -8,10 +8,12 @@
         <!-- First set -->
         <div class="marquee-item" v-for="tech in techs" :key="'a-' + tech.label">
           <img :src="tech.badge" :alt="tech.label" class="badge-img" />
+          <img src="/src/assets/cherry.png" class="marquee-cherry" alt="" />
         </div>
         <!-- Duplicate for seamless loop -->
         <div class="marquee-item" v-for="tech in techs" :key="'b-' + tech.label">
           <img :src="tech.badge" :alt="tech.label" class="badge-img" />
+          <img src="/src/assets/cherry.png" class="marquee-cherry" alt="" />
         </div>
       </div>
     </div>
@@ -31,7 +33,7 @@ const techs = [
   { label: 'Python',     badge: badge('Python',     'python') },
   { label: 'PHP',        badge: badge('PHP',        'php') },
   { label: 'Java',       badge: badge('Java',       'openjdk') },
-  { label: 'C++',        badge: badge('C%2B%2B',    'c%2B%2B') },
+  { label: 'C++',        badge: badge('C++',        'c%2B%2B') },
   { label: 'HTML5',      badge: badge('HTML5',      'html5') },
   { label: 'MySQL',      badge: badge('MySQL',      'mysql') },
   { label: 'Vue.js',     badge: badge('Vue.js',     'vuedotjs') },
@@ -118,6 +120,19 @@ const techs = [
 
   .marquee-item:hover & {
     opacity: 1;
+  }
+}
+
+.marquee-cherry {
+  height: 20px;
+  margin-left: 2rem;
+  opacity: 0.7;
+  filter: drop-shadow(0 2px 4px rgba(8,0,3,0.5));
+  transition: transform 0.4s ease, opacity 0.4s ease;
+
+  .marquee-item:hover & {
+    opacity: 1;
+    transform: scale(1.2) rotate(15deg);
   }
 }
 </style>

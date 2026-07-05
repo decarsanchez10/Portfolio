@@ -26,11 +26,10 @@ body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none;
-  opacity: 0.15; /* Adjusted for realism, making it a subtle texture */
-  background-image: url('../assets/leopard.png');
+  opacity: 0.12; /* Lower opacity since we removed the dark blend mode */
+  background-image: url('~assets/leopard.png');
   background-size: cover;
   background-position: center;
-  mix-blend-mode: multiply; /* Rich blend with the crimson-black base */
 }
 
 // ── BASE ────────────────────────────────────────────────────────

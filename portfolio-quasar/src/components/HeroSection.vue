@@ -3,6 +3,13 @@
     <div class="hero-gradient" />
     <div class="hero-vignette" />
 
+    <!-- Parallax Floral & Fruit Motifs -->
+    <img class="floral-motif lily-tl" src="/src/assets/lily.png" alt="" />
+    <img class="floral-motif lily-br" src="/src/assets/lily.png" alt="" />
+    <img class="fruit-motif cherry-1" src="/src/assets/cherry.png" alt="" />
+    <img class="fruit-motif cherry-2" src="/src/assets/cherry.png" alt="" />
+    <img class="fruit-motif cherry-3" src="/src/assets/cherry.png" alt="" />
+
     <div class="hero-content">
       <!-- LEFT: Text -->
       <div class="hero-left">
@@ -133,7 +140,7 @@ onMounted(() => {
   background:
     radial-gradient(ellipse 80% 70% at 20% 50%, rgba(155,16,32,0.4), transparent 60%),
     radial-gradient(ellipse 60% 50% at 80% 80%, rgba(212,146,10,0.15), transparent 55%),
-    linear-gradient(180deg, #080003 0%, #150008 50%, #080003 100%);
+    linear-gradient(180deg, rgba(8,0,3,0.6) 0%, rgba(21,0,8,0.7) 50%, rgba(8,0,3,0.6) 100%);
   animation: bgPulse 8s ease-in-out infinite;
 }
 @keyframes bgPulse { 0%,100% { opacity:1; } 50% { opacity:.75; } }
@@ -237,5 +244,42 @@ font-family:var(--font-s);
 @media (max-width: 768px) {
   .hero { padding: 6rem 1.5rem 4rem; }
   .frame-wrapper { width: 220px; height: 290px; }
+}
+
+/* ── UI MOTIFS (LILIES & CHERRIES) ── */
+.floral-motif, .fruit-motif {
+  position: absolute;
+  z-index: 1; /* Sits between gradient and content */
+  pointer-events: none;
+  filter: drop-shadow(0 15px 25px rgba(8,0,3,0.7));
+}
+.lily-tl {
+  top: -10%; left: -5%; width: 40vw; max-width: 450px;
+  animation: floatLily 12s ease-in-out infinite;
+}
+.lily-br {
+  bottom: -15%; right: -10%; width: 45vw; max-width: 550px;
+  animation: floatLily 14s ease-in-out infinite reverse;
+}
+.cherry-1 {
+  top: 18%; left: 12%; width: 100px;
+  animation: floatCherry 8s ease-in-out infinite;
+}
+.cherry-2 {
+  bottom: 25%; left: 45%; width: 75px;
+  animation: floatCherry 9s ease-in-out infinite reverse;
+}
+.cherry-3 {
+  top: 12%; right: 35%; width: 110px;
+  animation: floatCherry 10s ease-in-out infinite 1s;
+}
+
+@keyframes floatLily {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(3deg); }
+}
+@keyframes floatCherry {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-40px) rotate(15deg); }
 }
 </style>
