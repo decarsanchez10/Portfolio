@@ -1,5 +1,6 @@
 <template>
-  <section id="contact" class="contact-section">
+  <div class="footer-wrapper">
+    <section id="contact" class="contact-section">
     <div class="contact-inner">
 
       <p class="sec-label fi" ref="labelEl">05 / Contact</p>
@@ -58,7 +59,8 @@
       @mouseleave="onLeave"
     />
     <span class="f-logo">DAS</span>
-  </footer>
+    </footer>
+  </div>
 </template>
 
 <script setup>
@@ -121,8 +123,34 @@ const scrollToTop = () => {
 </script>
 
 <style lang="scss" scoped>
+.footer-wrapper {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background-image: url('../assets/footer-bg.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(6px);
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(8,0,3, 0.65);
+    z-index: 0;
+  }
+}
+
 .contact-section {
-  background: var(--s1);
+  position: relative;
+  z-index: 1;
+  background: transparent;
   padding: 9rem 0;
 }
 
@@ -201,15 +229,19 @@ font-family: 'Cinzel', serif;
   .contact-links { gap: 1.5rem; }
 }
 .site-footer {
-  background: var(--bg);
-  padding: 2rem 3rem;
-  border-top: 1px solid var(--s2);
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  padding: 2.5rem 3rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.15); /* Gold subtle border instead of s2 */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .f-copy {
+  position: relative;
+  z-index: 1;
   font-family: 'Space Mono', monospace;
   font-size: 0.58rem;
   letter-spacing: 0.2em;
@@ -218,13 +250,17 @@ font-family: 'Cinzel', serif;
 }
 
 .f-logo {
-font-family: 'Cinzel', serif;
+  position: relative;
+  z-index: 1;
+  font-family: 'Cinzel', serif;
   font-size: 1.7rem;
   color: var(--c);
   letter-spacing: 0.1em;
 }
 
 .f-top-btn {
+  position: relative;
+  z-index: 1;
   font-family: 'Space Mono', monospace !important;
   font-size: 0.6rem !important;
   letter-spacing: 0.15em !important;
