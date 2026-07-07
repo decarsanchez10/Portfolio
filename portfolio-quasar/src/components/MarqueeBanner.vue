@@ -35,7 +35,6 @@ const techs = [
   { label: 'Java',       badge: badge('Java',       'openjdk') },
   { label: 'C++',        badge: badge('C++',        'c%2B%2B') },
   { label: 'HTML5',      badge: badge('HTML5',      'html5') },
-  { label: 'MySQL',      badge: badge('MySQL',      'mysql') },
   { label: 'Vue.js',     badge: badge('Vue.js',     'vuedotjs') },
   { label: 'Quasar',     badge: badge('Quasar',     'quasar') },
   { label: 'Django',     badge: badge('Django',     'django') },
