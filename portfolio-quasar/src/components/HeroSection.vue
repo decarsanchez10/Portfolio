@@ -11,7 +11,6 @@
     <img class="fruit-motif cherry-3" src="/src/assets/cherry.png" alt="" />
 
     <div class="hero-content">
-      <!-- LEFT: Text -->
       <div class="hero-left">
         <p class="greeting" ref="greetingEl">✦ Hello, I'm</p>
         <h1 class="hero-name" ref="nameEl">
@@ -41,19 +40,6 @@
             @mouseenter="onEnter" @mouseleave="onLeave" />
         </div>
       </div>
-
-      <!-- RIGHT: Photo in Gold Frame -->
-      <div class="hero-right" ref="heroRight">
-        <div class="frame-wrapper" ref="frameWrapper">
-          <div class="frame-glow" />
-          <img class="profile-photo" src="/src/assets/decar-photo.png" alt="Decar Sanchez" />
-          <img class="gold-frame-img" src="/src/assets/gold-frame.png" alt="" />
-          <span class="corner-star s1">✦</span>
-          <span class="corner-star s2">✦</span>
-          <span class="corner-star s3">✦</span>
-          <span class="corner-star s4">✦</span>
-        </div>
-      </div>
     </div>
 
     <div class="scroll-ind" ref="scInd">
@@ -72,7 +58,6 @@ const emit = defineEmits(['scroll-to'])
 const { onEnter, onLeave } = useCursor()
 
 const heroRef    = ref(null)
-const heroRight  = ref(null)
 const greetingEl = ref(null)
 const nameEl     = ref(null)
 const ornamentEl = ref(null)
@@ -80,7 +65,6 @@ const roleEl     = ref(null)
 const taglineEl  = ref(null)
 const btnsEl     = ref(null)
 const scInd      = ref(null)
-const frameWrapper = ref(null)
 
 const initSparkles = () => {
   const hero = heroRef.value
@@ -99,7 +83,6 @@ onMounted(() => {
 
   gsap.set([greetingEl.value, ornamentEl.value, roleEl.value, taglineEl.value, btnsEl.value], { opacity: 0, y: 30 })
   gsap.set(nameEl.value.querySelectorAll('span'), { opacity: 0, y: '110%' })
-  gsap.set(heroRight.value, { opacity: 0, x: 60 })
   gsap.set(scInd.value, { opacity: 0 })
 
   gsap.timeline({ delay: 1.5 })
@@ -109,21 +92,20 @@ onMounted(() => {
     .to(roleEl.value,      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
     .to(taglineEl.value,   { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
     .to(btnsEl.value,      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
-    .to(heroRight.value,   { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out' }, '-=1.2')
     .to(scInd.value,       { opacity: 1, duration: 0.6 }, '-=0.3')
-
-  // Magnetic on frame
-  setTimeout(() => {
-    const fw = frameWrapper.value
-    if (!fw) return
-    fw.addEventListener('mousemove', (e) => {
-      const r = fw.getBoundingClientRect()
-      gsap.to(fw, { x: (e.clientX-(r.left+r.width/2))*0.06, y: (e.clientY-(r.top+r.height/2))*0.06, duration: 0.5, ease: 'power2.out' })
-    })
-    fw.addEventListener('mouseleave', () => gsap.to(fw, { x:0, y:0, duration: 0.8, ease: 'elastic.out(1,0.5)' }))
-  }, 2600)
 })
 </script>
+
+<style lang="scss">
+/* Register Bloved font globally so @font-face isn't scoped away */
+@font-face {
+  font-family: 'Bloved';
+  src: url('../assets/Bloved.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
 
 <style lang="scss" scoped>
 .hero {
@@ -150,25 +132,25 @@ onMounted(() => {
 }
 .hero-content {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 4rem; align-items: center;
-  max-width: 1300px; margin: 0 auto; width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  max-width: 900px; margin: 0 auto; width: 100%;
 }
-.hero-left { display: flex; flex-direction: column; gap: 1.5rem; }
+.hero-left { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
 .greeting {
   font-family: var(--font-script); font-size: 2rem;
   color: var(--gold); margin: 0;
   filter: drop-shadow(0 0 10px rgba(212,146,10,.45));
 }
 .hero-name {
-  display: flex; flex-direction: column;
-font-family:var(--font-s);
+  display: flex; flex-direction: row; gap: 0.3em; flex-wrap: wrap; justify-content: center;
+  font-family: 'Bloved', var(--font-s), cursive;
   font-size: clamp(3.5rem,7vw,7.5rem);
   line-height: 0.95; letter-spacing: 0.08em; font-weight: 900; margin: 0;
 }
-.name-first { display: block; }
+.name-first { display: inline; }
 .name-last {
-  display: block; color: var(--cream);
+  display: inline; color: var(--cream);
   -webkit-text-stroke: 1px rgba(212,146,10,0.35);
 }
 .ornament-line {
@@ -184,9 +166,9 @@ font-family:var(--font-s);
 }
 .hero-tagline {
   font-size: clamp(.95rem,1.3vw,1.15rem); font-weight: 300;
-  line-height: 1.8; color: var(--gr); margin: 0; max-width: 500px;
+  line-height: 1.8; color: var(--gr); margin: 0 auto; max-width: 680px;
 }
-.hero-btns { display: flex; flex-wrap: wrap; gap: .75rem; padding-top: .5rem; }
+.hero-btns { display: flex; flex-wrap: wrap; gap: .75rem; padding-top: .5rem; justify-content: center; }
 
 .btn-cream {
   font-family: var(--font-mono) !important; font-size: .62rem !important;
@@ -198,52 +180,8 @@ font-family:var(--font-s);
   :deep(.q-focus-helper) { display: none; }
 }
 
-.hero-right { display: flex; justify-content: center; align-items: center; }
-.frame-wrapper {
-  position: relative; width: 340px; height: 450px;
-  animation: floatY 4s ease-in-out infinite;
-}
-@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
-.frame-glow {
-  position: absolute; inset: -20px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,146,10,.3), transparent 70%);
-  animation: pulseGold 3s ease-in-out infinite; z-index: 0;
-}
-@keyframes pulseGold { 0%,100% { opacity:.5; transform:scale(.95); } 50% { opacity:1; transform:scale(1.05); } }
-.profile-photo {
-  position: absolute; top: 8%; left: 10%;
-  width: 80%; height: 84%;
-  object-fit: cover; object-position: center top;
-  z-index: 1;
-  filter: brightness(.95) contrast(1.05) saturate(1.1);
-}
-.gold-frame-img {
-  position: absolute; top: -12%; left: -38%; width: 170%; height: 120%;
-  z-index: 2;
-  filter: drop-shadow(0 8px 30px rgba(212,146,10,.55)) drop-shadow(0 0 60px rgba(212,146,10,.2));
-  pointer-events: none;
-}
-.corner-star {
-  position: absolute; color: var(--gold-lt); font-size: 1rem; z-index: 3;
-  animation: starPulse 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(212,146,10,.8));
-}
-.s1 { top:2%; left:5%; animation-delay:0s; }
-.s2 { top:2%; right:5%; animation-delay:.5s; }
-.s3 { bottom:2%; left:5%; animation-delay:1s; }
-.s4 { bottom:2%; right:5%; animation-delay:1.5s; }
-@keyframes starPulse { 0%,100% { opacity:.4; transform:scale(.8); } 50% { opacity:1; transform:scale(1.3); } }
-
-@media (max-width: 1024px) {
-  .hero-content { grid-template-columns: 1fr; text-align: center; }
-  .hero-right { order: -1; }
-  .frame-wrapper { width: 260px; height: 340px; }
-  .hero-btns { justify-content: center; }
-  .hero-tagline { margin: 0 auto; }
-}
 @media (max-width: 768px) {
   .hero { padding: 6rem 1.5rem 4rem; }
-  .frame-wrapper { width: 220px; height: 290px; }
 }
 
 /* ── UI MOTIFS (LILIES & CHERRIES) ── */
