@@ -4,8 +4,8 @@
     <div class="hero-vignette" />
 
     <!-- Parallax Floral & Fruit Motifs -->
-    <img class="floral-motif lily-tl" src="/src/assets/lily.png" alt="" />
-    <img class="floral-motif lily-br" src="/src/assets/lily.png" alt="" />
+    <img class="floral-motif lily-tl" src="~assets/lily.png" alt="" />
+    <img class="floral-motif lily-br" src="~assets/lily.png" alt="" />
 
 
     <div class="hero-content">

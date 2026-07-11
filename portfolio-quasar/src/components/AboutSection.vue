@@ -23,8 +23,8 @@
         <div class="photo-col fi-right" ref="rightEl">
           <div class="frame-wrapper">
             <div class="frame-glow" />
-            <img class="profile-photo" src="/src/assets/decar-photo.png" alt="Decar Sanchez" />
-            <img class="gold-frame-img" src="/src/assets/gold-frame.png" alt="" />
+            <img class="profile-photo" src="~assets/decar-photo.png" alt="Decar Sanchez" />
+            <img class="gold-frame-img" src="~assets/gold-frame.png" alt="" />
             <span class="corner-star s1">✦</span>
             <span class="corner-star s2">✦</span>
             <span class="corner-star s3">✦</span>

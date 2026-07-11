@@ -8,12 +8,12 @@
         <!-- First set -->
         <div class="marquee-item" v-for="tech in techs" :key="'a-' + tech.label">
           <img :src="tech.badge" :alt="tech.label" class="badge-img" />
-          <img src="/src/assets/cherry.png" class="marquee-cherry" alt="" />
+          <img src="~assets/cherry.png" class="marquee-cherry" alt="" />
         </div>
         <!-- Duplicate for seamless loop -->
         <div class="marquee-item" v-for="tech in techs" :key="'b-' + tech.label">
           <img :src="tech.badge" :alt="tech.label" class="badge-img" />
-          <img src="/src/assets/cherry.png" class="marquee-cherry" alt="" />
+          <img src="~assets/cherry.png" class="marquee-cherry" alt="" />
         </div>
       </div>
     </div>

@@ -65,6 +65,10 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useCursor } from 'src/composables/useCursor'
 
+import certicodeLogo from 'src/assets/certicode-logo.png'
+import scibizLogo from 'src/assets/scibizinformatics-logo.png'
+import essuLogo from 'src/assets/ESSU-logo.png'
+
 gsap.registerPlugin(ScrollTrigger)
 const { onEnter, onLeave } = useCursor()
 
@@ -82,7 +86,7 @@ const experiences = [
     type: 'Internship',
     period: 'July 2026 – Present',
     location: 'Remote',
-    logo: '/src/assets/certicode-logo.png',
+    logo: certicodeLogo,
     desc: 'Contributing to web development projects, building responsive user interfaces, and actively learning modern web technologies.',
     skills: ['Web Development', 'Front-End Development']
   },
@@ -92,7 +96,7 @@ const experiences = [
     type: 'Internship',
     period: 'May 2026 – July 2026 · 3 mos',
     location: 'Tacloban, Eastern Visayas, Philippines · On-site',
-    logo: '/src/assets/scibizinformatics-logo.png',
+    logo: scibizLogo,
     desc: 'Building high-performance web applications at the intersection of blockchain and governance technology. Contributing to full-stack features across the Vue 3 + Django stack.',
     skills: ['Full-Stack Development', 'Front-End Development', 'Vue 3', 'Django', 'Blockchain']
   },
@@ -102,7 +106,7 @@ const experiences = [
     type: 'Education',
     period: 'Jul 2026',
     location: 'Salcedo Campus, Eastern Samar, Philippines',
-    logo: '/src/assets/ESSU-logo.png',
+    logo: essuLogo,
     desc: 'Bachelor of Science in Computer Engineering. Actively honing skills in web development, algorithms, and emerging technologies.',
     skills: ['HTML5', 'Creative Problem Solving', 'JavaScript', 'CSS3', 'PHP', 'MySQL', 'Python', 'Git']
   }
