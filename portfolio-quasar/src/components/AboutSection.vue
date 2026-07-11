@@ -20,12 +20,15 @@
           </div>
         </div>
 
-        <div class="stat-grid fi-right" ref="rightEl">
-          <div class="stat-card" v-for="(s,i) in stats" :key="s.label"
-            :ref="el=>statRefs[i]=el"
-            @mouseenter="onEnter" @mouseleave="onLeave">
-            <div class="stat-n shimmer-text" :ref="el=>countEls[i]=el">{{ s.display }}</div>
-            <div class="stat-l">{{ s.label }}</div>
+        <div class="photo-col fi-right" ref="rightEl">
+          <div class="frame-wrapper">
+            <div class="frame-glow" />
+            <img class="profile-photo" src="/src/assets/decar-photo.png" alt="Decar Sanchez" />
+            <img class="gold-frame-img" src="/src/assets/gold-frame.png" alt="" />
+            <span class="corner-star s1">✦</span>
+            <span class="corner-star s2">✦</span>
+            <span class="corner-star s3">✦</span>
+            <span class="corner-star s4">✦</span>
           </div>
         </div>
       </div>
@@ -34,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useCursor } from 'src/composables/useCursor'
@@ -49,8 +52,6 @@ const rightEl  = ref(null)
 const bodyEl   = ref(null)
 const ctaEl    = ref(null)
 const t1       = ref(null)
-const statRefs = reactive([])
-const countEls = reactive([])
 
 // ── Typing ───────────────────────────────────────────────────────
 const typedText  = ref('')
@@ -71,21 +72,6 @@ const startTyping = () => {
   next()
 }
 
-// ── Counter ──────────────────────────────────────────────────────
-const stats = [
-  { display:'2+',  target:2,  suffix:'+', label:'Years Experience'    },
-  { display:'4+',  target:4,  suffix:'+', label:'Projects Built'      },
-  { display:'8+',  target:8,  suffix:'+', label:'Languages & Tools'   },
-  { display:'2027',target:2027,suffix:'', label:'Expected Graduation' }
-]
-
-const runCounter = (el, target, suffix) => {
-  const obj = { val: 0 }
-  gsap.to(obj, {
-    val: target, duration: 2.5, ease: 'power2.out',
-    onUpdate: () => { el.textContent = Math.round(obj.val) + suffix }
-  })
-}
 
 onMounted(() => {
   gsap.set(t1.value, { y:'110%' })
@@ -105,18 +91,6 @@ onMounted(() => {
   if (bodyEl.value) {
     ScrollTrigger.create({ trigger:bodyEl.value, start:'top 80%', once:true, onEnter:()=>startTyping() })
   }
-
-  // Stat cards + counters
-  statRefs.forEach((card,i) => {
-    if (!card) return
-    ScrollTrigger.create({
-      trigger: card, start:'top 85%', once:true,
-      onEnter: () => {
-        gsap.fromTo(card, {opacity:0,y:40}, {opacity:1,y:0,duration:.8,ease:'power3.out',delay:i*.1})
-        if (countEls[i]) runCounter(countEls[i], stats[i].target, stats[i].suffix)
-      }
-    })
-  })
 })
 onUnmounted(()=>{ if(typingTimer) clearTimeout(typingTimer) })
 </script>
@@ -126,16 +100,44 @@ onUnmounted(()=>{ if(typingTimer) clearTimeout(typingTimer) })
 .about-in  { max-width:1440px; margin:0 auto; padding:0 3rem; }
 .about-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:7rem; align-items:start; }
 .abody { font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:300; line-height:1.9; color:var(--lgr); min-height:14rem; :deep(strong){color:var(--cream);font-weight:600;} }
-.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
-.stat-card {
-  background:var(--s1); padding:2.5rem 2rem; position:relative; overflow:hidden;
-  transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .3s; border:1px solid transparent;
-  &::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(to right,var(--gold-dk),var(--gold-lt)); transform:scaleX(0); transform-origin:left; transition:transform .5s cubic-bezier(.16,1,.3,1); }
-  &:hover { transform:translateY(-5px); border-color:rgba(201,168,76,.2); &::before{transform:scaleX(1);} }
-}
-.stat-n { font-family:var(--font-d); font-size:4rem; line-height:1; font-weight:700; }
-.stat-l { font-family:var(--font-m); font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gr); margin-top:.5rem; }
+.stat-grid { display: none; }
 
-@media (max-width:1024px) { .about-grid{grid-template-columns:1fr;gap:4rem;} }
-@media (max-width:768px)  { .about-in{padding:0 1.5rem;} .about-sec{padding:5.5rem 0;} }
+.photo-col { display: flex; justify-content: center; align-items: center; }
+.frame-wrapper {
+  position: relative; width: 340px; height: 450px;
+  animation: floatY 4s ease-in-out infinite;
+}
+@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+.frame-glow {
+  position: absolute; inset: -20px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,146,10,.3), transparent 70%);
+  animation: pulseGold 3s ease-in-out infinite; z-index: 0;
+}
+@keyframes pulseGold { 0%,100% { opacity:.5; transform:scale(.95); } 50% { opacity:1; transform:scale(1.05); } }
+.profile-photo {
+  position: absolute; top: 8%; left: 10%;
+  width: 80%; height: 84%;
+  object-fit: cover; object-position: center top;
+  z-index: 1;
+  filter: brightness(.95) contrast(1.05) saturate(1.1);
+}
+.gold-frame-img {
+  position: absolute; top: -12%; left: -38%; width: 170%; height: 120%;
+  z-index: 2;
+  filter: drop-shadow(0 8px 30px rgba(212,146,10,.55)) drop-shadow(0 0 60px rgba(212,146,10,.2));
+  pointer-events: none;
+}
+.corner-star {
+  position: absolute; color: var(--gold-lt); font-size: 1rem; z-index: 3;
+  animation: starPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(212,146,10,.8));
+}
+.s1 { top:2%; left:5%; animation-delay:0s; }
+.s2 { top:2%; right:5%; animation-delay:.5s; }
+.s3 { bottom:2%; left:5%; animation-delay:1s; }
+.s4 { bottom:2%; right:5%; animation-delay:1.5s; }
+@keyframes starPulse { 0%,100% { opacity:.4; transform:scale(.8); } 50% { opacity:1; transform:scale(1.3); } }
+
+@media (max-width:1024px) { .about-grid{grid-template-columns:1fr;gap:4rem;} .frame-wrapper{width:260px;height:340px;} }
+@media (max-width:768px)  { .about-in{padding:0 1.5rem;} .about-sec{padding:5.5rem 0;} .frame-wrapper{width:220px;height:290px;} }
 </style>
