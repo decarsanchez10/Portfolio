@@ -2,7 +2,7 @@
   <section id="about" class="about-sec">
     <div class="about-in">
       <p class="sec-label fi" ref="lbl">✦ About Me</p>
-      <p class="sec-label-mono fi fi-d1" ref="mono">03 / Who I Am</p>
+      <p class="sec-label-mono fi fi-d1" ref="mono">01 / Who I Am</p>
       <div class="about-grid">
         <div class="fi-left" ref="leftEl">
           <h2 class="sec-title">
@@ -58,7 +58,7 @@ const typedText  = ref('')
 const showCursor = ref(false)
 let   typingTimer = null
 
-const fullText = `I am <strong>Decar A. Sanchez</strong>, a Computer Engineering student at ESSU – Salcedo Campus with a passion for building impactful digital experiences. As a <strong>Web Development Intern at SciBiz Informatics</strong>, I work at the intersection of web development and blockchain technology.<br/><br/>From building digital governance systems for local communities to designing immersive <strong>3D landing pages with Three.js</strong>, I craft solutions that are both functional and beautiful. Fluent in English, Tagalog, and Waray-waray.`
+const fullText = `I'm <strong>Decar Sanchez</strong>, a Computer Engineering student at Eastern Samar State University (Salcedo Campus) with a passion for building practical, real-world software — from blockchain applications to developer tools.<br/><br/>During my OJT at <strong>SciBiz Informatics</strong>, We built Provena, a decentralized document notarization platform on the Bitcoin Cash blockchain. The project involved a <strong>Vue 3/Quasar</strong> frontend, WizardConnect integration, real-time transaction queries via the Fulcrum/Electrum protocol, and CashScript smart contracts for on-chain proof of authenticity — giving me hands-on experience with full-stack development and blockchain infrastructure.<br/><br/>Beyond client work, I've published Red Velvet Theme, a VS Code theme extension, and co-authored undergraduate research on AI dependency and programming self-efficacy among freshman computing students.<br/><br/>I'm currently interning at <strong>CertiCode</strong> as a Web Developer, where I'm continuing to build things that solve real problems while sharpening my full-stack skills.`
 
 const startTyping = () => {
   typedText.value = ''; showCursor.value = true; let i = 0

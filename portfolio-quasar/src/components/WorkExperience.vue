@@ -2,9 +2,9 @@
   <section id="experience" class="exp-sec">
     <div class="exp-in">
       <p class="sec-label fi" ref="lbl">✦ My Journey</p>
-      <p class="sec-label-mono fi fi-d1" ref="mono">04 / Experience</p>
+      <p class="sec-label-mono fi fi-d1" ref="mono">02 / Experience</p>
       <h2 class="sec-title">
-        <div class="rev-line"><span ref="t1">WORK &amp;</span></div>
+        <div class="rev-line"><span ref="t1">EXPERIENCE &amp;</span></div>
         <div class="rev-line"><span ref="t2">EDUCATION</span></div>
       </h2>
 
@@ -77,6 +77,16 @@ const itemRefs = reactive([])
 
 const experiences = [
   {
+    title: 'Web Developer Intern',
+    company: 'Certicode',
+    type: 'Internship',
+    period: 'July 2026 – Present',
+    location: 'Remote',
+    logo: '/src/assets/certicode-logo.png',
+    desc: 'Contributing to web development projects, building responsive user interfaces, and actively learning modern web technologies.',
+    skills: ['Web Development', 'Front-End Development']
+  },
+  {
     title: 'Software Developer Intern',
     company: 'SciBiz Informatics',
     type: 'Internship',
@@ -92,7 +102,7 @@ const experiences = [
     type: 'Education',
     period: 'Jul 2026',
     location: 'Salcedo Campus, Eastern Samar, Philippines',
-    logo: null,
+    logo: '/src/assets/ESSU-logo.png',
     desc: 'Bachelor of Science in Computer Engineering. Actively honing skills in web development, algorithms, and emerging technologies.',
     skills: ['HTML5', 'Creative Problem Solving', 'JavaScript', 'CSS3', 'PHP', 'MySQL', 'Python', 'Git']
   }

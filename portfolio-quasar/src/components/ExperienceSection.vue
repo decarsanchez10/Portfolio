@@ -25,8 +25,10 @@
               <p class="slide-desc">{{p.desc}}</p>
               <div class="slide-tags">
                 <span class="s-logo-tag" v-for="t in p.tags" :key="t.name">
-                  <img :src="t.logo" :alt="t.name" class="s-tag-icon" />
-                  {{ t.name }}
+                  <div class="s-logo-wrap">
+                    <img :src="t.logo" :alt="t.name" class="s-tag-icon" />
+                  </div>
+                  <span class="s-tag-name">{{ t.name }}</span>
                 </span>
               </div>
             </div>
@@ -204,20 +206,38 @@ onMounted(() => {
 .slide-arr { position:absolute; top:2.5rem; right:2.5rem; font-size:1.3rem; color:var(--gold); transition:transform .4s cubic-bezier(.16,1,.3,1),color .3s; }
 .slide-title { font-family:var(--font-d); font-size:1.6rem; letter-spacing:.06em; margin:0 0 .9rem; line-height:1.2; color:var(--cream); }
 .slide-desc { font-size:.95rem; line-height:1.75; color:var(--gr); flex:1; margin-bottom:1.5rem; transition:color .4s; }
-.slide-tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+.slide-tags { display:flex; flex-wrap:wrap; gap:.6rem; }
 .s-logo-tag {
-  display: inline-flex; align-items: center; gap: .35rem;
+  display: inline-flex; align-items: center; gap: .45rem;
   font-family: var(--font-m); font-size: .55rem; letter-spacing: .1em; text-transform: uppercase;
-  padding: .28rem .7rem .28rem .45rem;
-  border: 1px solid rgba(201,168,76,.25); color: var(--gold);
-  transition: background .3s, color .3s, border-color .3s;
-  .h-slide:hover & { background: rgba(201,168,76,.2); color: var(--gold-lt); border-color: rgba(201,168,76,.4); }
+  padding: .25rem .7rem .25rem .25rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08); color: var(--lgr);
+  transition: background .3s, color .3s, border-color .3s, box-shadow .3s;
+  .h-slide:hover & {
+    background: rgba(212,146,10,.08);
+    color: var(--cream);
+    border-color: rgba(212,146,10,.25);
+    box-shadow: 0 0 10px rgba(212,146,10,.1);
+  }
+}
+.s-logo-wrap {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  transition: background .3s, box-shadow .3s;
+  .h-slide:hover & {
+    background: rgba(212,146,10,.15);
+    box-shadow: 0 0 8px rgba(212,146,10,.2);
+  }
 }
 .s-tag-icon {
-  width: 14px; height: 14px; object-fit: contain; flex-shrink: 0;
-  filter: brightness(0) invert(1); opacity: .75;
-  transition: opacity .3s;
-  .h-slide:hover & { opacity: 1; }
+  width: 12px; height: 12px; object-fit: contain; flex-shrink: 0;
+  filter: brightness(.8) saturate(.6);
+  transition: filter .3s;
+  .h-slide:hover & { filter: brightness(1.1) saturate(1); }
 }
 
 .h-progress { position:sticky; bottom:0; left:0; right:0; height:2px; background:var(--s2); }

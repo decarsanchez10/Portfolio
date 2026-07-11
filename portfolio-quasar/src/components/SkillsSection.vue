@@ -12,7 +12,7 @@
       <!-- Header -->
       <div class="skills-header">
         <p class="sec-label fi" ref="lbl">✦ Proficiency</p>
-        <p class="sec-label-mono fi fi-d1" ref="mono">05 / Skills</p>
+        <p class="sec-label-mono fi fi-d1" ref="mono">03 / Skills</p>
         <h2 class="sec-title">
           <div class="rev-line"><span ref="t1">TECHNICAL</span></div>
           <div class="rev-line"><span ref="t2">SKILLS</span></div>

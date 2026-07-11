@@ -1,6 +1,6 @@
 <template>
-  <div class="footer-wrapper">
-    <section id="contact" class="contact-section">
+  <div id="contact" class="footer-wrapper">
+    <section class="contact-section">
     <div class="contact-inner">
 
       <p class="sec-label fi" ref="labelEl">05 / Contact</p>

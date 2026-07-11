@@ -59,11 +59,11 @@ const drawer     = ref(false)
 const scrolled   = ref(false)
 
 const navItems = [
-  { id: 'about',     label: 'About'     },
-  { id: 'projects',  label: 'Work'      },
-  { id: 'skills',    label: 'Skills'    },
-  { id: 'education', label: 'Education' },
-  { id: 'contact',   label: 'Contact'   }
+  { id: 'about',      label: 'About'      },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills',     label: 'Skills'     },
+  { id: 'projects',   label: 'Work'       },
+  { id: 'contact',    label: 'Contact'    }
 ]
 
 const scrollTo = (id) => {
