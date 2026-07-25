@@ -1,4 +1,6 @@
 /* eslint-disable */
+const publicPath = process.env.PUBLIC_PATH || '/Portfolio/';
+
 module.exports = function () {
   return {
     boot: [],
@@ -7,7 +9,7 @@ module.exports = function () {
     build: {
       target: { browser: ['es2019','edge88','firefox78','chrome87','safari13.1'], node: 'node20' },
       vueRouterMode: 'hash',
-      publicPath: '/Portfolio/'
+      publicPath
     },
     devServer: { open: true, port: 3000 },
     framework: {
