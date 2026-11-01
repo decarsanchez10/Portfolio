@@ -17,8 +17,7 @@
         </h1>
         <div class="ornament-line" ref="ornamentEl">⸻ ✦ ⸻</div>
         <p class="hero-role" ref="roleEl">
-          Computer Engineering Student<br/>
-          <em class="role-accent">&amp; Web Development Intern</em>
+          Computer Engineering Student
         </p>
         <p class="hero-tagline" ref="taglineEl">
           Passionate about building high-performance administrative web apps,

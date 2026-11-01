@@ -177,11 +177,17 @@ onMounted(() => {
 }
 .proj-header { max-width:1440px; margin:0 auto; padding:9rem 3rem 3rem; }
 
-.h-container { width:100%; overflow:hidden; }
-.h-track { display:flex; gap:2px; width:max-content; padding:0 6vw 6rem; }
+.h-container { width:100%; height:100vh; display:flex; align-items:center; overflow:hidden; }
+.h-track {
+  --slide-width: min(480px, 85vw);
+  display:flex;
+  gap:2px;
+  width:max-content;
+  padding:0 calc((100vw - var(--slide-width)) / 2);
+}
 
 .h-slide {
-  width: min(480px, 85vw);
+  width: var(--slide-width);
   flex-shrink: 0;
   background: var(--bg);
   position: relative;
@@ -243,5 +249,5 @@ onMounted(() => {
 .h-progress { position:sticky; bottom:0; left:0; right:0; height:2px; background:var(--s2); }
 .h-bar { height:100%; background:linear-gradient(to right,var(--gold-dk),var(--gold-lt)); width:0; transition:width .1s; }
 
-@media (max-width:768px) { .proj-header { padding:5.5rem 1.5rem 2rem; } .h-track { padding:0 1.5rem 4rem; } }
+@media (max-width:768px) { .proj-header { padding:5.5rem 1.5rem 2rem; } }
 </style>
