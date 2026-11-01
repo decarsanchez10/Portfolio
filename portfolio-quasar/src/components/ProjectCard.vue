@@ -1,5 +1,5 @@
 <template>
-  <q-card flat bordered class="project-card q-pa-md" @mouseenter="onHover(true)" @mouseleave="onHover(false)">
+  <q-card flat bordered class="project-card q-pa-md">
     <q-card-section>
       <div class="text-h6 text-weight-light">{{ project.title }}</div>
       <div class="text-caption text-grey-7 q-mt-sm">{{ project.description }}</div>
@@ -18,7 +18,6 @@
 
     <q-card-actions align="right">
       <q-btn
-        ref="actionBtn"
         flat
         no-caps
         label="Launch Case Study"
@@ -32,14 +31,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { gsap } from 'gsap';
-
 const props = defineProps({
   project: { type: Object, required: true }
 });
-
-const actionBtn = ref(null);
 
 // Fix for malfunctioning buttons: explicitly ensuring event propagation is handled
 const handleClick = (e) => {
@@ -60,26 +54,19 @@ const getLogo = (name) => {
   return mapping[name.toLowerCase()] || '';
 };
 
-const onHover = (entering) => {
-  // Minimalist GSAP hover: Subtle scale and lift
-  gsap.to(actionBtn.value.$el, {
-    y: entering ? -3 : 0,
-    scale: entering ? 1.02 : 1,
-    duration: 0.3,
-    ease: 'power1.out'
-  });
-};
 </script>
 
 <style scoped>
 .project-card {
-  transition: all 0.4s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   border-radius: 16px;
   border: 1px solid #eee;
   background: #fff;
+  will-change: transform;
 }
 
 .project-card:hover {
+  transform: translateY(-4px);
   border-color: var(--q-primary);
   box-shadow: 0 10px 30px rgba(0,0,0,0.03) !important;
 }
@@ -87,7 +74,7 @@ const onHover = (entering) => {
 .tech-icon {
   filter: grayscale(100%);
   opacity: 0.6;
-  transition: all 0.3s ease;
+  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .project-card:hover .tech-icon {
@@ -98,5 +85,12 @@ const onHover = (entering) => {
 .minimal-btn {
   font-weight: 300;
   letter-spacing: 0.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .tech-icon {
+    transition: none;
+  }
 }
 </style>
